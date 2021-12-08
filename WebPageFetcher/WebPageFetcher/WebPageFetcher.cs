@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using WebPageFetcher.Contracts;
@@ -21,7 +22,7 @@ namespace WebPageFetcher
             _logger = loggerFactory.CreateLogger<WebPageFetcher>();
         }
 
-        public async Task FetchAndSave(string[] urls, bool printMetaData = false)
+        public async Task FetchAndSave(IEnumerable<string> urls, bool printMetaData = false)
         {
             foreach (var url in urls)
             {

@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -20,7 +21,7 @@ namespace WebPageFetcher
             public bool Metadata { get; set; }
 
             [Value(0, Required = true, HelpText = "List of URLs to fetch")]
-            public string Urls { get; set; }
+            public IEnumerable<string> Urls { get; set; }
         }
 
         private ILogger _logger;
