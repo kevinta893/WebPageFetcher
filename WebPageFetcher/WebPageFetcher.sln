@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebPageFetcher.FileReposito
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebPageFetcher.WebClient", "WebPageFetcher.WebClient\WebPageFetcher.WebClient.csproj", "{897A98D2-976E-4D1F-B950-FD697EC7C9A4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebPageParser.WebPageMetadataParser", "WebPageParser.WebPageMetadataParser\WebPageParser.WebPageMetadataParser.csproj", "{EA68C495-1DB6-4412-B982-C80C14553653}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{897A98D2-976E-4D1F-B950-FD697EC7C9A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{897A98D2-976E-4D1F-B950-FD697EC7C9A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{897A98D2-976E-4D1F-B950-FD697EC7C9A4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EA68C495-1DB6-4412-B982-C80C14553653}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA68C495-1DB6-4412-B982-C80C14553653}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA68C495-1DB6-4412-B982-C80C14553653}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA68C495-1DB6-4412-B982-C80C14553653}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

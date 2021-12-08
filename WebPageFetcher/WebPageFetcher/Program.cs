@@ -56,6 +56,7 @@ namespace WebPageFetcher
                 .AddConsoleLogger()
                 .AddLocalFileRepository()
                 .AddWebClient()
+                .AddWebPageMetadataParser()
                 .BuildServiceProvider();
         }
     }

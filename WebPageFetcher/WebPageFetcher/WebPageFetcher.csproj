@@ -16,6 +16,7 @@
     <ProjectReference Include="..\WebPageFetcher.FileRepository\WebPageFetcher.FileRepository.csproj" />
     <ProjectReference Include="..\WebPageFetcher.Logger\WebPageFetcher.Logger.csproj" />
     <ProjectReference Include="..\WebPageFetcher.WebClient\WebPageFetcher.WebClient.csproj" />
+    <ProjectReference Include="..\WebPageParser.WebPageMetadataParser\WebPageParser.WebPageMetadataParser.csproj" />
   </ItemGroup>
 
 </Project>

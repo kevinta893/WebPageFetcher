@@ -11,14 +11,20 @@ namespace WebPageFetcher
     {
         private readonly IWebClient _webClient;
         private readonly ILocalFileRepository _localFileRepository;
+        private readonly IWebPageMetadataService _webPageMetadataService;
         private readonly ILogger _logger;
 
         public const string HtmlPageFileExtension = ".html";
 
-        public WebPageFetcher(IWebClient webClient, ILocalFileRepository localFileRepository, ILoggerFactory loggerFactory)
+        public WebPageFetcher(
+            IWebClient webClient, 
+            ILocalFileRepository localFileRepository, 
+            IWebPageMetadataService webPageMetadataService, 
+            ILoggerFactory loggerFactory)
         {
             _webClient = webClient;
             _localFileRepository = localFileRepository;
+            _webPageMetadataService = webPageMetadataService;
             _logger = loggerFactory.CreateLogger<WebPageFetcher>();
         }
 
@@ -36,16 +42,32 @@ namespace WebPageFetcher
 
             //Get web page
             _logger.LogInformation($"Fetching webpage from URL: {url}");
-            var webPageStream = await _webClient.GetWebPage(url);
 
-            //Save web page
-            var saveLocation = Environment.CurrentDirectory;
-            var fileName = uri.Host + HtmlPageFileExtension;
+            using (var webPageStream = await _webClient.GetWebPage(url))
+            {
+                //Print metadata
+                if (printMetaData)
+                {
+                    PrintPageMetadata(webPageStream, url);
+                }
 
-            var filePath = Path.Combine(saveLocation, fileName);
+                //Save web page
+                var saveLocation = Environment.CurrentDirectory;
+                var fileName = uri.Host + HtmlPageFileExtension;
 
-            _logger.LogInformation($"Saving webpage to webpage to file: {filePath}");
-            await _localFileRepository.SaveFile(filePath, webPageStream);
+                var filePath = Path.Combine(saveLocation, fileName);
+
+                _logger.LogInformation($"Saving webpage to webpage to file: {filePath}");
+                await _localFileRepository.SaveFile(filePath, webPageStream);
+            }
+        }
+
+        public void PrintPageMetadata(Stream webPageStream, string url)
+        {
+            var metadata = _webPageMetadataService.ParseMetaData(webPageStream, url);
+            var consoleMessage = $"site: {metadata.Site}\nnum_links: {metadata.NumLinks}\nimages: {metadata.Images}\nlast_fetch: {metadata.LastFetch.ToUniversalTime().ToString("ddd MMM yyyy H:m UTC")}\n";
+
+            Console.WriteLine(consoleMessage);
         }
     }
 }

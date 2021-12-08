@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using WebPageFetcher.Contracts;
-using WebPageFetcher.FileRepository.Service;
+using WebPageFetcher.FileRepository.Services;
 
 namespace WebPageFetcher.FileRepository
 {

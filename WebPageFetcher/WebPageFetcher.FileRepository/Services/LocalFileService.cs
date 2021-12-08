@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using WebPageFetcher.Contracts;
 
-namespace WebPageFetcher.FileRepository.Service
+namespace WebPageFetcher.FileRepository.Services
 {
     public class LocalFileService : ILocalFileRepository
     {
