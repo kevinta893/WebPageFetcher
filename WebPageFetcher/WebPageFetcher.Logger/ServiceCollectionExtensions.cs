@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Serilog;
 
 namespace WebPageFetcher.Logger
 {
@@ -7,7 +8,18 @@ namespace WebPageFetcher.Logger
     {
         public static IServiceCollection AddConsoleLogger(this IServiceCollection serviceCollection)
         {
-            return serviceCollection.AddSingleton<ILogger, ConsoleLogger>();
+            var logger = new LoggerConfiguration()
+                .MinimumLevel.Error()
+                .WriteTo.Console()
+                .CreateLogger();
+
+            serviceCollection.AddLogging(x =>
+            {
+                x.ClearProviders();
+                x.AddSerilog(logger);
+            });
+
+            return serviceCollection;
         }
     }
 }

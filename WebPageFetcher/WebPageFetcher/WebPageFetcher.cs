@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Net.Http;
 using System.Threading.Tasks;
 using WebPageFetcher.Contracts;
 
@@ -32,16 +33,28 @@ namespace WebPageFetcher
         {
             foreach (var url in urls)
             {
-                await FetchAndSave(url, printMetaData);
+                try
+                {
+                    await FetchAndSave(url, printMetaData);
+                }
+                catch(HttpRequestException ex)
+                {
+                    _logger.LogError($"Request failed. Exception Message: {ex.Message}");
+                }
+                catch(Exception ex)
+                {
+                    _logger.LogError(ex, $"Request failed. Message: {ex.Message}");
+                    throw;
+                }
             }
         }
 
-        public async Task FetchAndSave(string url, bool printMetaData = false)
+        private async Task FetchAndSave(string url, bool printMetaData = false)
         {
             var uri = new Uri(url);
 
             //Get web page
-            _logger.LogInformation($"Fetching webpage from URL: {url}");
+            Console.WriteLine($"Fetching webpage from URL: {url}");
 
             using (var webPageStream = await _webClient.GetWebPage(url))
             {
@@ -57,7 +70,7 @@ namespace WebPageFetcher
 
                 var filePath = Path.Combine(saveLocation, fileName);
 
-                _logger.LogInformation($"Saving webpage to webpage to file: {filePath}");
+                Console.WriteLine($"Saving webpage to webpage to file: {filePath}");
                 await _localFileRepository.SaveFile(filePath, webPageStream);
             }
         }
