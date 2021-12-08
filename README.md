@@ -1,6 +1,14 @@
 # WebPageFetcher
-A CLI that fetches a web page and saves it as a file.
+A CLI that fetches an HTML web page and saves it as a file.
 
+
+## How to run
+
+Enter a list of URLs separated by space. Add an additional --metadata flag to also print metadata about the webpage:
+
+```
+./WebPageFetcher --metadata https://github.com https://reddit.com
+```
 
 ## Build
 
