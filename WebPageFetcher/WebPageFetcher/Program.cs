@@ -39,7 +39,7 @@ namespace WebPageFetcher
                     try
                     {
                         var webPageFetcher = services.GetRequiredService<WebPageFetcher>();
-                        await webPageFetcher.FetchAndSave(o.Urls, o.Metadata);
+                        webPageFetcher.FetchAndSave(o.Urls, o.Metadata).Wait();
                     }
                     catch (Exception ex)
                     {
